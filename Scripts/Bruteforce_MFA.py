@@ -3,7 +3,6 @@ import threading
 import time
 from queue import Queue
 
-# ===== CONFIGURAÇÕES =====
 BASE_URL = "http://127.0.0.1:1337"
 USERNAME = "windows96"
 PASSWORD = "iloveyou2"
@@ -13,16 +12,13 @@ NUM_THREADS = 10           # número fixo de threads
 THROTTLE_DELAY = 0.5       # atraso entre requisições (segundos)
 CODE_LIMIT = 10000         # total de códigos (ex: 0000–9999)
 
-# ===== SINAIS E LOCKS =====
 found_event = threading.Event()
 write_lock = threading.Lock()
 task_queue = Queue()
 
-# ===== PRODUÇÃO DE CÓDIGOS =====
 for code in range(CODE_LIMIT):
     task_queue.put(code)
 
-# ===== FUNÇÃO DE TRABALHO =====
 def worker():
     sess = requests.Session()
 
